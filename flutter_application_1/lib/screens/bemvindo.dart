@@ -5,6 +5,13 @@ class BemVindo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('BemVindo');
+    return Scaffold(
+      appBar: AppBar(),
+      body: Stack(
+        children: [
+          Image.asset('assets/images/bg1.png'),
+        ],
+      ),
+    );
   }
 }
