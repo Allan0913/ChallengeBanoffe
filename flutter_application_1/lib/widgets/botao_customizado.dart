@@ -1,14 +1,41 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-class botaoBemVindo extends StatelessWidget {
-  const botaoBemVindo({super.key});
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/cadastro.dart';
+
+class BotaoBemVindo extends StatelessWidget {
+  const BotaoBemVindo({super.key, this.buttonText, this.onTap, this.color, this.textColor});
+  final String? buttonText;
+  final Widget? onTap;
+  final Color? color;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(50),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+           MaterialPageRoute(
+            builder: (e)=> onTap!,
+            ),
+          );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(20.0),
+        decoration: BoxDecoration(
+          color: color!,
+          borderRadius: const BorderRadius.only(topLeft: Radius.circular(50),
+          ),
+        ),
+        child: Text(
+          buttonText!,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: textColor!,
+          ),
         ),
       ),
     );
