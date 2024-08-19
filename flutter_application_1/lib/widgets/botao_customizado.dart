@@ -1,7 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/cadastro.dart';
+
 
 class BotaoBemVindo extends StatelessWidget {
   const BotaoBemVindo({super.key, this.buttonText, this.onTap, this.color, this.textColor});

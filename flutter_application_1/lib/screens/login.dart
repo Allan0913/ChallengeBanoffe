@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/cadastro.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_application_1/widgets/Scaffold_customizado.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TelaLogin extends StatefulWidget {
   const TelaLogin({super.key});
+
 
   @override
   State<TelaLogin> createState() => _TelaLoginState();
@@ -42,7 +45,7 @@ class _TelaLoginState extends State<TelaLogin> {
                 children: [
                   Text(
                     "Área de Login",
-                    style: TextStyle(
+                    style: GoogleFonts.bebasNeue(
                       fontSize: 30.0,
                       fontWeight: FontWeight.w900,
                       color: lightColorScheme.primary,
@@ -170,7 +173,43 @@ class _TelaLoginState extends State<TelaLogin> {
                           },
                           child: const Text("Entrar"),
                         ),
-                      )
+                      ),
+                      const SizedBox(
+                        height: 25.0,
+                      ),
+                      // don't have an account
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Não tem uma conta? ',
+                            style: TextStyle(
+                              color: Colors.black45,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (e) => const TelaCadastro(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'Cadastre-se',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: lightColorScheme.primary,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+
                     ]
                   ),
                 ),
