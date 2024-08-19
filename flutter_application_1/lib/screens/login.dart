@@ -11,6 +11,7 @@ class TelaLogin extends StatefulWidget {
 
 class _TelaLoginState extends State<TelaLogin> {
   final _formLogarKey = GlobalKey<FormState>();
+  bool lembrarSenha = true;
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustomizado(
@@ -23,8 +24,9 @@ class _TelaLoginState extends State<TelaLogin> {
           ),
         ),
         Expanded(
-          flex: 7,
+          flex: 3,
           child: Container(
+            padding: const EdgeInsets.fromLTRB(25.0, 50.0, 25.0, 50.0),
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -32,24 +34,149 @@ class _TelaLoginState extends State<TelaLogin> {
               topRight: Radius.circular(40.0),
             ),
           ),
-          child: Form(
-            key: _formLogarKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Bem vindo",
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.w900,
-                    color: lightColorScheme.primary,
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formLogarKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Área de Login",
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.w900,
+                      color: lightColorScheme.primary,
+                      ),
                     ),
+                    const SizedBox(
+                        height: 25.0,
+                      ),
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Coloque o seu email';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        label: const Text('Email'),
+                        hintText: 'Coloque E-mail',
+                        hintStyle: const TextStyle(
+                          color: Colors.black26,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                          color: Colors.black12,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.black12,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                      ),
+                    ),
+                    const SizedBox(
+                        height: 25.0,
+                      ),                  
+                    TextFormField(
+                      obscureText: true,
+                      obscuringCharacter: '*',
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Coloque o sua senha';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        label: const Text('Senha'),
+                        hintText: 'Coloque Senha',
+                        hintStyle: const TextStyle(
+                          color: Colors.black26,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                          color: Colors.black12,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.black12,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                      ),
+                    ),
+                    const SizedBox(
+                        height: 25.0,
+                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:[
+                      Row( 
+                        children: [
+                        Checkbox(
+                          value: lembrarSenha,
+                          onChanged: (bool? value) {
+                        setState(() {
+                          lembrarSenha = value!;
+                        });
+                      },
+                        activeColor: lightColorScheme.primary,
+                        ),
+                        const Text(
+                          'Lembrar Senha',
+                          style: TextStyle(
+                            color: Colors.black45,
+                            ),
+                          ),
+                        ],
+                      ),
+                      GestureDetector(
+                        child: Text(
+                          'Esqueceu a senha?',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: lightColorScheme.primary,
+                              ),
+                            ),
+                          ), 
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 25.0,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                                if (_formLogarKey.currentState!.validate() &&
+                                lembrarSenha) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Processando data'),
+                                ),
+                              );
+                            } else if (!lembrarSenha) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        'Por favor, concorde com o processamento de dados pessoais')),
+                              );
+                            }
+                          },
+                          child: const Text("Entrar"),
+                        ),
+                      )
+                    ]
                   ),
-              ],
+                ),
+          ),
             ),
           ),
-        ),
-      ),
         ],
       ),
     );
